@@ -1,4 +1,4 @@
-const server = require("./index.js");
+const server = require("./socket.js");
 const mongoose = require("mongoose");
 
 const DB_URI = process.env.MONGO_DB_URI

@@ -57,6 +57,7 @@ socket.on('newMessage', function (message) {
   <div class="message__body">
     <p class="message__text"></p>
   </div>
+  <img src="https://picsum.photos/500/10?random" alt="">
 </li>
   `;
 
