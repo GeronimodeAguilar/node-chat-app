@@ -10,29 +10,34 @@ router.get("/register", (req, res) => {
   res.render("register");
 });
 
-router.post("/chat", async (req, res) => {
-  const { username, password, name, room } = req.body;
-  const user = await userService.getUser(username, password, name, room);
-console.log(req.body);
+router.get("/chat", (req, res) => {
+  User.find({})
+  .then(users => {
+   res.render('chat', {
+    users: users
+     });
+  })
+});
+
+router.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  const user = await userService.getUser(username, password);
+  console.log(user);
+  
   if (user && user.id) {
     req.session.userId = user.id;
-    User.find({})
-    .then(users => {
-     res.render('chat', {
-      users: users
-       });
-    })
+     res.render('login');
   } else {
     res.status(401).end("invalid credentials");
   }
 });
 
 router.post("/register", async (req, res) => {
-  const { username, password, name, room } = req.body;
-  const user = new User({ username, password, name, room });
+  const { username, password } = req.body;
+  const user = new User({ username, password });
   const savedUser = await userService.saveUser(user);
   req.session.userId = savedUser.id;
-  res.render("chat");
+  res.render("login");
 });
 
 module.exports = router;

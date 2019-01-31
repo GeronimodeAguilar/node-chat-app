@@ -11,8 +11,8 @@ class UserService {
     return user;
   }
 
-  async getUser(username, password, name, room) {
-    return await this.User.findOne({ username, password, name, room });
+  async getUser(username, password) {
+    return await this.User.findOne({ username, password });
   }
 
   async getUserById(userId) {
