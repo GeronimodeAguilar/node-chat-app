@@ -34,16 +34,19 @@ app.use("/", homeController, todoController);
 var io = socketIO(server);
 var users = new Users();
 
-const publicPath = path.join(__dirname, '../public');
-
 io.on('connection', (socket) => {
   console.log('New user connected');
 
   socket.on('join', (params, callback) => {
-    params = querystring.parse(params, null, null);
-    if (!isRealString(params.name) || !isRealString(params.room)) {
-      return callback('Name and room name are required.');
+    params = {
+      name: 'chatbot',
+      room: 'home'
     }
+    console.log(params);
+//    params = querystring.parse(params, null, null);
+  //  if (!isRealString(params.name) || !isRealString(params.room)) {
+  //   return callback('Name and room name are required.');
+  //  }
 
     socket.join(params.room);
     users.removeUser(socket.id);

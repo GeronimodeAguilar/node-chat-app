@@ -8,9 +8,15 @@
         <div class="chat__sidebar">
           <h3>People</h3>
           <div id="users">
-            <ol class="user-list"></ol>
+            <ol class="user-list">
+            </ol>
+            <ol class="old-list">
+                    <% users.forEach(user => { %>
+                        <h1><%= user.username %></h1>  
+                        <% }) %> 
+            </ol>
           </div>
-          <figure><img src="https://picsum.photos/200/300" alt=""></figure> 
+          <figure><img src="https://picsum.photos/200/400" alt=""></figure> 
         </div>
       
         <div class="chat__main">
