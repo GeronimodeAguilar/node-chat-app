@@ -11,8 +11,8 @@ router.get("/register", (req, res) => {
 });
 
 router.post("/chat", async (req, res) => {
-  const { username, password } = req.body;
-  const user = await userService.getUser(username, password);
+  const { username, password, name, room } = req.body;
+  const user = await userService.getUser(username, password, name, room);
 console.log(req.body);
   if (user && user.id) {
     req.session.userId = user.id;
@@ -28,8 +28,8 @@ console.log(req.body);
 });
 
 router.post("/register", async (req, res) => {
-  const { username, password } = req.body;
-  const user = new User({ username, password });
+  const { username, password, name, room } = req.body;
+  const user = new User({ username, password, name, room });
   const savedUser = await userService.saveUser(user);
   req.session.userId = savedUser.id;
   res.render("chat");
