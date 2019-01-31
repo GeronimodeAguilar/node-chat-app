@@ -16,7 +16,7 @@ router.post("/login", async (req, res) => {
 
   if (user && user.id) {
     req.session.userId = user.id;
-    res.redirect("/todos");
+    res.render("chat");
   } else {
     res.status(401).end("invalid credentials");
   }
