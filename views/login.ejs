@@ -22,6 +22,14 @@
             </div>
           </form>
         </div>
+        <ol class="old-list">
+            <% users.forEach(user => { %>
+               <ul class="room-list">
+                <li class="room-list__item"><%= user.room%></li>  
+                <li class="room-list__item"><%= user.name%></li>  
+               </ul>
+                <% }) %>
+</ol>
       </body>
 
 </html>

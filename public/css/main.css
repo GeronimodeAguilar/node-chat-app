@@ -40,9 +40,26 @@ input {
 }
 
 .old-list {
+  display: grid;
+  grid-auto-flow: row;
   color: orange;
   background-color: ghostwhite;
   padding: 1rem 0.1rem;
+}
+
+.room-list {
+  display: grid;
+  grid-auto-flow: row;
+  color: orange;
+  background-color: ghostwhite;
+  padding:  0.1rem;
+  border: solid 0.2rem red;
+}
+
+.room-list__item {
+  background-color: orange;
+  color: ghostwhite;
+  padding:  0.1rem;
 }
 
 .user-name {

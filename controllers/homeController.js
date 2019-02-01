@@ -36,9 +36,13 @@ router.post("/login", async (req, res) => {
   
   if (user && user.id) {
     req.session.userId = user.id;
+    User.find()
+    .then(users => {
     res.render('login', {
+      users: users,
       userId: user.id
     });
+  });
   } else {
     res.status(401).end("invalid credentials");
   }
@@ -49,9 +53,13 @@ router.post("/register", async (req, res) => {
   const user = new User({ username, password });
   const savedUser = await userService.saveUser(user);
   req.session.userId = savedUser.id;
+  User.find()
+  .then(users => {
   res.render('login', {
+    users: users,
     userId: user.id
   });
+});
 });
 
 module.exports = router;
