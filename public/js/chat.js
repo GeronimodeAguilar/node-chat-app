@@ -34,6 +34,7 @@ socket.on('updateUserList', function (users) {
   
   users.forEach(function (user) {
     let newLi = document.createElement('li');
+    newLi.classList.add('user-list__item');
     newLi.innerHTML = user;
     userList.appendChild(newLi);
   });

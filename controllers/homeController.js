@@ -22,7 +22,6 @@ router.get("/register", (req, res) => {
 
 router.post("/chat", async (req, res) => {
   const { name, room , userId } = req.body;
-  console.log(name, room, userId);
   User.findByIdAndUpdate(userId, {name: name, room:room })
   .then(user => {
    res.render('chat', {
@@ -30,7 +29,6 @@ router.post("/chat", async (req, res) => {
      });
   })
 });
-
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
@@ -44,7 +42,6 @@ router.post("/login", async (req, res) => {
   } else {
     res.status(401).end("invalid credentials");
   }
-//  console.log(user.id);
 });
 
 router.post("/register", async (req, res) => {
