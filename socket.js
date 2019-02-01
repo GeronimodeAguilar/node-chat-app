@@ -1,7 +1,5 @@
 const app = require("./index.js");
-const path = require('path');
 const http = require('http');
-const express = require('express');
 const socketIO = require('socket.io');
 const querystring = require('querystring');
 var server = http.createServer(app);
@@ -20,7 +18,7 @@ io.on('connection', (socket) => {
     if (!isRealString(params.name) || !isRealString(params.room)) {
      return callback('Name and room name are required.');
     }
-    console.log(params);
+//    console.log(params);
 
     socket.join(params.room);
     users.removeUser(socket.id);
