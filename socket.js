@@ -7,18 +7,26 @@ var server = http.createServer(app);
 const {generateMessage, generateLocationMessage} = require('./utils/message');
 const {isRealString} = require('./utils/validation');
 const {Users} = require('./utils/users');
+const User = require("./models/UserModel");
 var io = socketIO(server);
 var users = new Users();
 
 io.on('connection', (socket) => {
   console.log('New user connected');
 
-  socket.on('join', (params, callback) => {
-    params = querystring.parse(params, null, null);
+  socket.on('join', (name, callback) => {
+    const userName = {name: name};
+    User.findOne(userName)
+    .then(user => {
+    const params = {
+        name: user.name,
+        room:user.room
+      }; 
+      return params
+    }).then (params => {
     if (!isRealString(params.name) || !isRealString(params.room)) {
      return callback('Name and room name are required.');
     }
-//    console.log(params);
 
     socket.join(params.room);
     users.removeUser(socket.id);
@@ -27,7 +35,10 @@ io.on('connection', (socket) => {
     io.to(params.room).emit('updateUserList', users.getUserList(params.room));
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat app'));
     socket.broadcast.to(params.room).emit('newMessage', generateMessage('Admin', `${params.name} has joined.`));
-    callback();
+    callback()})  
+    .catch( error => {
+      console.error( error.message );
+    })
   });
 
   socket.on('createMessage', (message, callback) => {

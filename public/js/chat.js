@@ -13,8 +13,8 @@ function scrollToBottom () {
 }
 
 socket.on('connect', function () {
-  const params = window.location.search.slice(1) ;
-  socket.emit('join', params, function (err) {
+  const name = document.querySelector('#user-name').textContent;
+  socket.emit('join', name, function (err) {
     if (err) {
       alert(err);
       window.location.href = '/';
