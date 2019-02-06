@@ -3,7 +3,8 @@
 
 <%- include('./partials/header.ejs') %>
 
-<body class="centered-form">
+<body>
+<div class="centered-form">
         <div class="centered-form__form">
           <form action="/chat" method="post">
             <input type="hidden" name="userId" value="<%= userId %>"/>            <div class="form-field">
@@ -18,18 +19,18 @@
               <input type="text" name="room"/>
             </div>
             <div class="form-field">
-              <input type="submit" value="Enter">
+              <input class="login-input" type="submit" value="Enter">
             </div>
           </form>
         </div>
-        <ol class="old-list">
+        <div class="old-list">
             <% users.forEach(user => { %>
                <ul class="room-list">
-                <li class="room-list__item"><%= user.room%></li>  
-                <li class="room-list__item"><%= user.name%></li>  
+                <li class="room-list__room"><%= user.room%></li>  
+                <li class="room-list__name"><%= user.name%></li>  
                </ul>
                 <% }) %>
-</ol>
-      </body>
-
+</div>
+      </div>
+</body>
 </html>
